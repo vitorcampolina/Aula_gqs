@@ -1,3 +1,3 @@
 # Aula_gqs Versionamento de Código 
-##Integrantes: 
+## Integrantes: 
 **Lucas Ferreira Colombini RA: 422142408**
