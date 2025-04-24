@@ -13,7 +13,7 @@ public class ServicoFinanceiro {
     // Métodos para gestão de contas
     public void adicionarConta(ContaCliente conta) {
         contas.add(conta);
-        System.out.println("Conta " + conta.getId() + " adicionada com sucesso.");
+        System.out.printf("Conta %d adicionada com sucesso.%n", conta.getId());
     }
     
     public ContaCliente buscarContaPorId(int id) {
@@ -28,8 +28,8 @@ public class ServicoFinanceiro {
     // Métodos para gestão de faturas
     public void registrarFatura(FaturaCliente fatura) {
         faturas.add(fatura);
-        System.out.println("Fatura " + fatura.getId() + " registrada para o cliente " + 
-                          fatura.getCliente().getNome());
+        System.out.printf("Fatura %d registrada para o cliente %s%n",
+                          fatura.getId(), fatura.getCliente().getNome());
     }
     
     public List<FaturaCliente> listarFaturasPorCliente(int idCliente) {
@@ -56,13 +56,13 @@ public class ServicoFinanceiro {
         }
         
         if (fatura == null || conta == null) {
-            System.out.println("Fatura ou conta não encontrada.");
+            System.out.printf("Fatura ou conta não encontrada.%n");
             return false;
         }
         
         // Verifica se o cliente da conta é o mesmo da fatura
         if (conta.getCliente().getId() != fatura.getCliente().getId()) {
-            System.out.println("A conta não pertence ao cliente da fatura.");
+            System.out.printf("A conta não pertence ao cliente da fatura.%n");
             return false;
         }
         
@@ -70,11 +70,11 @@ public class ServicoFinanceiro {
         if (conta.getSaldo() >= valorComDesconto) {
             conta.subSaldo(valorComDesconto);
             faturas.remove(fatura);
-            System.out.println("Fatura " + idFatura + " paga com sucesso da conta " + idConta);
+            System.out.printf("Fatura %d paga com sucesso da conta %d%n", idFatura, idConta);
             return true;
         } else {
-            System.out.println("Saldo insuficiente na conta " + idConta + 
-                             " para pagar a fatura " + idFatura);
+            System.out.printf("Saldo insuficiente na conta %d para pagar a fatura %d%n",
+                              idConta, idFatura);
             return false;
         }
     }
@@ -85,38 +85,37 @@ public class ServicoFinanceiro {
         ContaCliente destino = buscarContaPorId(idContaDestino);
         
         if (origem == null || destino == null) {
-            System.out.println("Conta de origem ou destino não encontrada.");
+            System.out.printf("Conta de origem ou destino não encontrada.%n");
             return false;
         }
         
         if (origem.subSaldo(valor) != origem.getSaldo()) {
-            // Se o subSaldo não foi efetivado (saldo insuficiente)
-            return false;
+          // Se o subSaldo não foi efetivado (saldo insuficiente)
+          return false;
         }
         
         destino.addDeposito(valor);
-        System.out.println("Transferência de R$" + valor + " realizada da conta " + 
-                          idContaOrigem + " para " + idContaDestino);
+        System.out.printf("Transferência de R$%.2f realizada da conta %d para %d%n",
+                          valor, idContaOrigem, idContaDestino);
         return true;
     }
     
     // Métodos de relatório
     public void gerarRelatorioClientes() {
-        System.out.println("\n=== RELATÓRIO DE CLIENTES ===");
+        System.out.printf("%n=== RELATÓRIO DE CLIENTES ===%n");
         for (ContaCliente conta : contas) {
             Cliente cliente = conta.getCliente();
-            System.out.println(cliente.getNome() + " (ID: " + cliente.getId() + 
-                             ") - Saldo: R$" + conta.getSaldo());
+            System.out.printf("%s (ID: %d) - Saldo: R$%.2f%n",
+                              cliente.getNome(), cliente.getId(), conta.getSaldo());
         }
     }
     
     public void gerarRelatorioFaturas() {
-        System.out.println("\n=== RELATÓRIO DE FATURAS ===");
+        System.out.printf("%n=== RELATÓRIO DE FATURAS ===%n");
         for (FaturaCliente fatura : faturas) {
-            System.out.println("Fatura ID: " + fatura.getId() + 
-                             " - Cliente: " + fatura.getCliente().getNome() +
-                             " - Valor: R$" + fatura.getValor() +
-                             " - Valor c/ desconto: R$" + fatura.getValorComDesconto());
+            System.out.printf("Fatura ID: %d - Cliente: %s - Valor: R$%.2f - Valor c/ desconto: R$%.2f%n",
+                              fatura.getId(), fatura.getCliente().getNome(),
+                              fatura.getValor(), fatura.getValorComDesconto());
         }
     }
 }
