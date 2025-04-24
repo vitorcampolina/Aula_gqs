@@ -100,6 +100,57 @@ public class ServicoFinanceiro {
         return true;
     }
     
+    
+    //Método para saques
+    public boolean sacar(int idConta, double valor) {
+        // Validação do valor
+        if (valor <= 0) {
+            System.out.println("Valor do saque deve ser positivo.");
+            return false;
+        }
+        
+        // Localiza a conta
+        ContaCliente conta = buscarContaPorId(idConta);
+        if (conta == null) {
+            System.out.printf("Conta %d não encontrada.%n", idConta);
+            return false;
+        }
+        
+        // Verifica saldo suficiente
+        if (conta.getSaldo() < valor) {
+            System.out.printf("Saldo insuficiente na conta %d para realizar o saque.%n", idConta);
+            return false;
+        }
+        
+        // Efetua o saque
+        conta.subSaldo(valor);
+        System.out.printf("Saque de R$%.2f realizado na conta %d. Novo saldo: R$%.2f%n",
+                         valor, idConta, conta.getSaldo());
+        return true;
+    }
+    
+  //Método para depositos
+    public boolean depositar(int idConta, double valor) {
+        // Validação do valor
+        if (valor <= 0) {
+            System.out.println("Valor do depósito deve ser positivo.");
+            return false;
+        }
+        
+        // Localiza a conta
+        ContaCliente conta = buscarContaPorId(idConta);
+        if (conta == null) {
+            System.out.printf("Conta %d não encontrada.%n", idConta);
+            return false;
+        }
+        
+        // Efetua o depósito
+        conta.addDeposito(valor);
+        System.out.printf("Depósito de R$%.2f realizado na conta %d. Novo saldo: R$%.2f%n",
+                         valor, idConta, conta.getSaldo());
+        return true;
+    }
+    
     // Métodos de relatório
     public void gerarRelatorioClientes() {
         System.out.printf("%n=== RELATÓRIO DE CLIENTES ===%n");
