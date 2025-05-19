@@ -40,13 +40,13 @@ public class ContaCliente {
 
     public double addDeposito(double valor) {
         saldo += valor;
-        System.out.println("Depósito realizado. Novo saldo: R$" + saldo);
+        System.out.printf("Depósito realizado. Novo saldo: R$%.2f%n", saldo);
         return saldo;
     }
 
     public double subSaldo(double valor) {
         if (valor > saldo) {
-            System.out.println("Saldo insuficiente. Saldo atual: R$" + saldo);
+            System.out.printf("Saldo insuficiente. Saldo atual: R$%.2f%n", saldo);
             return saldo;
         }
         saldo -= valor;
@@ -55,6 +55,6 @@ public class ContaCliente {
 
     @Override
     public String toString() {
-        return cliente.getNome() + "(" + id + ") saldo=R$" + String.format("%.2f", saldo);
+        return String.format("%s(%d) saldo=R$%.2f", cliente.getNome(), id, saldo);
     }
 }

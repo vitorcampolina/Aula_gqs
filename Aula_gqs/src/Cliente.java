@@ -1,4 +1,3 @@
-
 public class Cliente {
     private int id;
     private String nome;
@@ -35,6 +34,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return nome + "(" + id + ")(" + desconto + "%)";
+        return String.format("%s(%d)(%d%%)", nome, id, desconto);
     }
 }

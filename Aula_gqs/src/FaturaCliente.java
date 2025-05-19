@@ -1,4 +1,3 @@
-
 public class FaturaCliente {
     private int id;
     private Cliente cliente;
@@ -36,11 +35,12 @@ public class FaturaCliente {
     }
 
     public double getValorComDesconto() {
-        return valor * (1 - cliente.getDesconto() / 100.0);
+        return Desconto.aplicarDesconto(valor, cliente.getDesconto());
     }
 
     @Override
     public String toString() {
-        return "Fatura [id=" + id + ", cliente=" + cliente.toString() + ", valor=" + valor + "]";
+        return String.format("Fatura [id=%d, cliente=%s, valor=R$%.2f]",
+                             id, cliente.toString(), valor);
     }
 }
