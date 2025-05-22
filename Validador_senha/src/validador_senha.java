@@ -16,7 +16,7 @@ public class validador_senha {
         }
         long digitos = senha.chars().filter(Character::isDigit).count();
         if (digitos < 2) {
-            erros.add("A senha deve conter pelo menos 2 dígitos");
+            erros.add("A senha deve conter pelo menos 2 numerais");
         }
 
         return erros.isEmpty();
