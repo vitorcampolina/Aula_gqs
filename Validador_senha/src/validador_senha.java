@@ -18,6 +18,9 @@ public class validador_senha {
         if (digitos < 2) {
             erros.add("A senha deve conter pelo menos 2 numerais");
         }
+        if (!senha.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
+            erros.add("A senha deve conter pelo menos um caractere especial");
+        }
 
         return erros.isEmpty();
     }
