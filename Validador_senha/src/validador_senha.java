@@ -11,6 +11,9 @@ public class validador_senha {
         if (!senha.matches(".*[A-Z].*")) {
             erros.add("A senha deve conter letra maiúscula");
         }
+        if (senha == null || senha.length() < 8) {
+            erros.add("A senha deve ter pelo menos 8 caracteres");
+        }
 
         return erros.isEmpty();
     }
