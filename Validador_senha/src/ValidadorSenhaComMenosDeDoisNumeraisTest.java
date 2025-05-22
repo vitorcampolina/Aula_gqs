@@ -8,6 +8,6 @@ public class ValidadorSenhaComMenosDeDoisNumeraisTest {
         validador_senha validador = new validador_senha();
         boolean valido = validador.validar("Senhaa1!");
         assertFalse(valido);
-        assertTrue(validador.getErros().contains("A senha deve conter Pelomenos 2 numerais"));
+        assertTrue(validador.getErros().contains("A senha deve conter pelo menos 2 numerais"));
     }
 }
